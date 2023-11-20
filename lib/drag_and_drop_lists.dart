@@ -286,12 +286,15 @@ class DragAndDropLists extends StatefulWidget {
   /// https://github.com/flutter/flutter/issues/14842#issuecomment-371344881
   final bool removeTopPadding;
 
+  final ScrollPhysics? physics;
+
   DragAndDropLists({
     required this.children,
     required this.onItemReorder,
     required this.onListReorder,
     this.onItemAdd,
     this.onListAdd,
+    this.physics,
     this.onListDraggingChanged,
     this.listOnWillAccept,
     this.listOnAccept,
@@ -496,6 +499,7 @@ class DragAndDropListsState extends State<DragAndDropLists> {
     Widget _listView = ListView(
       scrollDirection: widget.axis,
       controller: _scrollController,
+      physics: widget.physics,
       children: _buildOuterList(dragAndDropListTarget, parameters),
     );
 
