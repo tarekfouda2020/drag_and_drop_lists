@@ -128,8 +128,7 @@ class ProgrammaticExpansionTileState extends State<ProgrammaticExpansionTile>
     _backgroundColor =
         _controller.drive(_backgroundColorTween.chain(_easeOutTween));
 
-    _isExpanded = PageStorage.of(context)
-            ?.readState(context, identifier: widget.listKey) as bool? ??
+    _isExpanded = PageStorage.of(context).readState(context, identifier: widget.listKey) as bool? ??
         widget.initiallyExpanded;
     if (_isExpanded) _controller.value = 1.0;
 
@@ -175,8 +174,7 @@ class ProgrammaticExpansionTileState extends State<ProgrammaticExpansionTile>
             });
           });
         }
-        PageStorage.of(context)
-            ?.writeState(context, _isExpanded, identifier: widget.listKey);
+        PageStorage.of(context).writeState(context, _isExpanded, identifier: widget.listKey);
       });
       if (widget.onExpansionChanged != null) {
         widget.onExpansionChanged!(_isExpanded);
@@ -233,7 +231,7 @@ class ProgrammaticExpansionTileState extends State<ProgrammaticExpansionTile>
     final ThemeData theme = Theme.of(context);
     _borderColorTween.end = theme.dividerColor;
     _headerColorTween
-      ..begin = theme.textTheme.subtitle1!.color
+      ..begin = theme.textTheme.titleMedium!.color
       ..end = theme.colorScheme.secondary;
     _iconColorTween
       ..begin = theme.unselectedWidgetColor
