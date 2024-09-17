@@ -2,6 +2,7 @@ import 'package:drag_and_drop_lists/drag_and_drop_builder_parameters.dart';
 import 'package:drag_and_drop_lists/drag_and_drop_interface.dart';
 import 'package:drag_and_drop_lists/drag_and_drop_item.dart';
 import 'package:flutter/material.dart';
+import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 
 abstract class DragAndDropListInterface implements DragAndDropInterface {
   List<DragAndDropItem>? get children;
@@ -11,11 +12,20 @@ abstract class DragAndDropListInterface implements DragAndDropInterface {
   /// Set to false if it must remain fixed.
   bool get canDrag;
 
+  Widget get header;
+
+  Widget get footer;
+
+  VoidCallback get onLoadMore;
+
+  String? get noMoreDataString;
+
+  RefreshController get refreshController;
+
   Widget generateWidget(DragAndDropBuilderParameters params);
 }
 
-abstract class DragAndDropListExpansionInterface
-    implements DragAndDropListInterface {
+abstract class DragAndDropListExpansionInterface implements DragAndDropListInterface {
   final List<DragAndDropItem>? children;
 
   DragAndDropListExpansionInterface({this.children});

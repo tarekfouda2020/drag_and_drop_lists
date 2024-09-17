@@ -7,6 +7,7 @@ import 'package:drag_and_drop_lists/drag_and_drop_item_wrapper.dart';
 import 'package:drag_and_drop_lists/drag_and_drop_list_interface.dart';
 import 'package:drag_and_drop_lists/programmatic_expansion_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 
 typedef void OnExpansionChanged(bool expanded);
 
@@ -34,6 +35,13 @@ class DragAndDropListExpansion implements DragAndDropListExpansionInterface {
   /// Set to false if it must remain fixed.
   final bool canDrag;
 
+  final Widget header;
+  final Widget footer;
+  final VoidCallback onLoadMore;
+  final VoidCallback onRefresh;
+  final String? noMoreDataString;
+  final RefreshController refreshController;
+
   /// Disable to borders displayed at the top and bottom when expanded
   final bool disableTopAndBottomBorders;
 
@@ -54,6 +62,12 @@ class DragAndDropListExpansion implements DragAndDropListExpansionInterface {
     this.lastTarget,
     required this.listKey,
     this.canDrag = true,
+    required this.header,
+    required this.footer,
+    required this.onLoadMore,
+    required this.onRefresh,
+    required this.noMoreDataString,
+    required this.refreshController,
     this.disableTopAndBottomBorders = false,
   }) {
     _expanded.value = initiallyExpanded;

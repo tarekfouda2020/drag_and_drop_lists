@@ -3,15 +3,13 @@ import 'package:drag_and_drop_lists/drag_and_drop_item.dart';
 import 'package:drag_and_drop_lists/drag_and_drop_item_target.dart';
 import 'package:drag_and_drop_lists/drag_and_drop_item_wrapper.dart';
 import 'package:drag_and_drop_lists/drag_and_drop_list_interface.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 
 class DragAndDropList implements DragAndDropListInterface {
-  /// The widget that is displayed at the top of the list.
-  final Widget? header;
 
-  /// The widget that is displayed at the bottom of the list.
-  final Widget? footer;
 
   /// The widget that is displayed to the left of the list.
   final Widget? leftSide;
@@ -43,6 +41,13 @@ class DragAndDropList implements DragAndDropListInterface {
   /// It is possible to not provide any children when an empty list is desired.
   final List<DragAndDropItem> children;
 
+
+  final Widget header;
+  final Widget footer;
+  final VoidCallback onLoadMore;
+  final String? noMoreDataString;
+  final RefreshController refreshController;
+
   /// Whether or not this item can be dragged.
   /// Set to true if it can be reordered.
   /// Set to false if it must remain fixed.
@@ -50,8 +55,11 @@ class DragAndDropList implements DragAndDropListInterface {
 
   DragAndDropList({
     required this.children,
-    this.header,
-    this.footer,
+    required this.onLoadMore,
+    required this.noMoreDataString,
+    required this.refreshController,
+    required this.header,
+    required this.footer,
     this.leftSide,
     this.rightSide,
     this.contentsWhenEmpty,
@@ -65,9 +73,6 @@ class DragAndDropList implements DragAndDropListInterface {
   @override
   Widget generateWidget(DragAndDropBuilderParameters params) {
     var contents = <Widget>[];
-    if (header != null) {
-      contents.add(Flexible(child: header!));
-    }
     Widget intrinsicHeight = IntrinsicHeight(
       child: Row(
         mainAxisAlignment: horizontalAlignment,
@@ -89,10 +94,6 @@ class DragAndDropList implements DragAndDropListInterface {
       );
     }
     contents.add(intrinsicHeight);
-
-    if (footer != null) {
-      contents.add(Flexible(child: footer!));
-    }
 
     return Container(
       width: params.axis == Axis.vertical
