@@ -200,7 +200,7 @@ class _DragAndDropListWrapper extends State<DragAndDropListWrapper> with TickerP
 
     if (widget.parameters.axis == Axis.horizontal && !widget.parameters.disableScrolling) {
       toReturn = SizedBox(
-        width: MediaQuery.of(context).size.width * .8,
+        width: widget.parameters.listWidth,
         child: LoadMoreRefresher(
           enablePullUp: true,
           enablePullDown: false,
