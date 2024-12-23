@@ -21,8 +21,7 @@ class DragAndDropItemTarget extends StatefulWidget {
   State<StatefulWidget> createState() => _DragAndDropItemTarget();
 }
 
-class _DragAndDropItemTarget extends State<DragAndDropItemTarget>
-    with TickerProviderStateMixin {
+class _DragAndDropItemTarget extends State<DragAndDropItemTarget> with TickerProviderStateMixin {
   DragAndDropItem? _hoveredDraggable;
 
   @override
@@ -33,14 +32,12 @@ class _DragAndDropItemTarget extends State<DragAndDropItemTarget>
           crossAxisAlignment: widget.parameters.verticalAlignment,
           children: <Widget>[
             AnimatedSize(
-              duration: Duration(
-                  milliseconds: widget.parameters.itemSizeAnimationDuration),
+              duration: Duration(milliseconds: widget.parameters.itemSizeAnimationDuration),
               alignment: Alignment.bottomCenter,
               child: _hoveredDraggable != null
                   ? Opacity(
                       opacity: widget.parameters.itemGhostOpacity,
-                      child: widget.parameters.itemGhost ??
-                          _hoveredDraggable!.child,
+                      child: widget.parameters.itemGhost ?? _hoveredDraggable!.child,
                     )
                   : Container(),
             ),
@@ -56,8 +53,7 @@ class _DragAndDropItemTarget extends State<DragAndDropItemTarget>
             onWillAccept: (incoming) {
               bool accept = true;
               if (widget.parameters.itemTargetOnWillAccept != null)
-                accept =
-                    widget.parameters.itemTargetOnWillAccept!(incoming, widget);
+                accept = widget.parameters.itemTargetOnWillAccept!(incoming, widget);
               if (accept && mounted) {
                 setState(() {
                   _hoveredDraggable = incoming;

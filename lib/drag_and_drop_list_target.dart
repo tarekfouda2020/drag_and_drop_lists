@@ -26,8 +26,7 @@ class DragAndDropListTarget extends StatefulWidget {
   State<StatefulWidget> createState() => _DragAndDropListTarget();
 }
 
-class _DragAndDropListTarget extends State<DragAndDropListTarget>
-    with TickerProviderStateMixin {
+class _DragAndDropListTarget extends State<DragAndDropListTarget> with TickerProviderStateMixin {
   DragAndDropListInterface? _hoveredDraggable;
 
   @override
@@ -35,8 +34,7 @@ class _DragAndDropListTarget extends State<DragAndDropListTarget>
     Widget visibleContents = Column(
       children: <Widget>[
         AnimatedSize(
-          duration: Duration(
-              milliseconds: widget.parameters.listSizeAnimationDuration),
+          duration: Duration(milliseconds: widget.parameters.listSizeAnimationDuration),
           alignment: widget.parameters.axis == Axis.vertical
               ? Alignment.bottomCenter
               : Alignment.centerLeft,
@@ -50,12 +48,8 @@ class _DragAndDropListTarget extends State<DragAndDropListTarget>
         ),
         widget.child ??
             Container(
-              height: widget.parameters.axis == Axis.vertical
-                  ? widget.lastListTargetSize
-                  : null,
-              width: widget.parameters.axis == Axis.horizontal
-                  ? widget.lastListTargetSize
-                  : null,
+              height: widget.parameters.axis == Axis.vertical ? widget.lastListTargetSize : null,
+              width: widget.parameters.axis == Axis.horizontal ? widget.lastListTargetSize : null,
             ),
       ],
     );
@@ -83,8 +77,7 @@ class _DragAndDropListTarget extends State<DragAndDropListTarget>
             onWillAccept: (incoming) {
               bool accept = true;
               if (widget.parameters.listTargetOnWillAccept != null) {
-                accept =
-                    widget.parameters.listTargetOnWillAccept!(incoming, widget);
+                accept = widget.parameters.listTargetOnWillAccept!(incoming, widget);
               }
               if (accept && mounted) {
                 setState(() {
