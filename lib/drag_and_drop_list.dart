@@ -6,7 +6,7 @@ import 'package:drag_and_drop_lists/drag_and_drop_list_interface.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class DragAndDropList implements DragAndDropListInterface {
   /// The widget that is displayed to the left of the list.
